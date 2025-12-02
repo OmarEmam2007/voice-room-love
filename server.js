@@ -1,33 +1,17 @@
 const express = require("express");
-const app = express();
-const http = require("http").createServer(app);
-const io = require("socket.io")(http);
+const http = require("http");
+const { Server } = require("socket.io");
 
-const PORT = process.env.PORT || 8080;
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 
 app.use(express.static("public"));
 
-let participants = [];
-
 io.on("connection", (socket) => {
-
-  // Join event
-  socket.on("join", (username) => {
-    socket.username = username;
-    participants.push(username);
-    io.emit("participants", participants);
-  });
-
-  // Disconnect event
-  socket.on("disconnect", () => {
-    participants = participants.filter(u => u !== socket.username);
-    io.emit("participants", participants);
-  });
-
-  // WebRTC signaling
-  socket.on("offer", (offer) => socket.broadcast.emit("offer", offer));
-  socket.on("answer", (answer) => socket.broadcast.emit("answer", answer));
-  socket.on("ice-candidate", (candidate) => socket.broadcast.emit("ice-candidate", candidate));
+    socket.on("offer", (data) => socket.broadcast.emit("offer", data));
+    socket.on("answer", (data) => socket.broadcast.emit("answer", data));
+    socket.on("ice-candidate", (data) => socket.broadcast.emit("ice-candidate", data));
 });
 
-http.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(3000, () => console.log("Server running on http://localhost:3000"));
