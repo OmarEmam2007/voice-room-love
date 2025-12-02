@@ -1,76 +1,150 @@
+/* General Body Styles */
 body {
-  background: linear-gradient(135deg, #ff7aa2, #ff4d6d, #ff92c2);
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Poppins", sans-serif;
-  color: white;
-  overflow: hidden;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+    overflow: hidden; /* Hide overflowing hearts */
 }
 
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Main Container */
 .container {
-  text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px 50px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    max-width: 450px;
+    width: 90%;
+    position: relative; /* For positioning elements inside */
+    z-index: 1;
 }
 
+/* Titles and Text */
 .title {
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px #fff; }
-  to   { text-shadow: 0 0 25px #ffbfd4; }
+    color: #e91e63; /* Deep Pink */
+    font-size: 3em;
+    margin-bottom: 5px;
+    font-weight: 700;
 }
 
 .sub {
-  margin-top: -10px;
-  font-size: 20px;
-  opacity: 0.9;
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 1.1em;
 }
 
-.start-btn {
-  margin-top: 30px;
-  padding: 15px 40px;
-  background: white;
-  color: #ff3a65;
-  font-weight: bold;
-  border: none;
-  border-radius: 30px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+/* Room and User Info */
+#room-info, #participants-info {
+    font-size: 1.1em;
+    color: #4a148c; /* Deep Purple */
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
-.start-btn:hover {
-  transform: scale(1.05);
-  background: #ffe6ee;
+/* Input Fields */
+.input-group {
+    margin-bottom: 20px;
 }
 
-.hearts::before,
-.hearts::after {
-  content: "❤️";
-  font-size: 80px;
-  position: absolute;
-  animation: float 4s infinite ease-in-out;
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1em;
+    text-align: center;
+    transition: border-color 0.3s;
 }
 
-.hearts::before {
-  left: 20%;
-  top: 10%;
+input[type="text"]:focus {
+    outline: none;
+    border-color: #e91e63;
 }
 
-.hearts::after {
-  right: 20%;
-  bottom: 10%;
+/* Buttons */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); opacity: 0.6; }
-  50% { transform: translateY(-20px); opacity: 1; }
-  100% { transform: translateY(0px); opacity: 0.6; }
+button {
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+#joinRoom, #startCall {
+    background-color: #28a745; /* Green */
+}
+
+#joinRoom:hover, #startCall:hover {
+    background-color: #218838;
+}
+
+.control-btn {
+    background-color: #6c757d; /* Gray */
+}
+
+.control-btn:hover {
+    background-color: #5a6268;
+}
+
+.control-btn.active {
+    background-color: #dc3545; /* Red for active/muted/deafened */
+}
+
+/* Status Text */
+#call-status {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #28a745;
+    height: 20px; /* Reserve space */
+}
+
+/* Floating Hearts Animation */
+.heart {
+    position: absolute;
+    font-size: 2rem;
+    color: red;
+    opacity: 0;
+    animation: floatUp 5s infinite ease-in;
+    z-index: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+    }
 }

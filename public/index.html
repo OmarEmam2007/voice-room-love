@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Omar ❤️ Ecrin - Voice Room</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omar ❤️ Ecrin - Private Voice Room</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -9,14 +11,31 @@
   <div class="container">
 
     <h1 class="title">
-      Omar ❤️ Ecrin 
+      Omar ❤️ Ecrin
     </h1>
 
     <p class="sub">Private Voice Room Just For Us</p>
 
-    <button id="startCall" class="start-btn">Start Call ❤️</button>
+    <div id="join-form">
+      <div class="input-group">
+        <input type="text" id="username" placeholder="Enter your name (e.g., Omar)" value="Omar">
+      </div>
+      <div class="input-group">
+        <input type="text" id="roomName" placeholder="Enter Room Name (e.g., LoveRoom)" value="LoveRoom">
+      </div>
+      <button id="joinRoom">Join Room</button>
+    </div>
 
-    <div class="hearts"></div>
+    <div id="call-controls" style="display:none;">
+      <p id="room-info"></p>
+      <p id="participants-info"></p>
+      <button id="startCall">Start Call ❤️</button>
+      <div class="controls">
+        <button id="muteBtn" class="control-btn">Mute</button>
+        <button id="deafenBtn" class="control-btn">Deafen</button>
+      </div>
+      <p id="call-status"></p>
+    </div>
 
   </div>
 
